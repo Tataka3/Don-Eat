@@ -23,6 +23,8 @@ def register(request):
 
 @login_required
 def setProfileData(request):
+    ob = ProfileModel.objects.get(user=request.user)
+    role = ob.category
     if request.method == 'POST':
         profile_form = ProfileForm(request.POST,request.FILES)
 
@@ -39,7 +41,8 @@ def setProfileData(request):
         profile_form = ProfileForm()
 
     context = {
-        'p_form': profile_form
+        'p_form': profile_form,
+        'role':role
     }
     return render(request,'users/setprofile.html',context)
 
@@ -48,6 +51,7 @@ def setProfileData(request):
 def profile(request):
 
     obj = ProfileModel.objects.get(user=request.user)
+    role = obj.category
 
     if request.method == 'POST':
         profile_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profilemodel)
@@ -63,7 +67,8 @@ def profile(request):
 
     context = {
         'p_form': profile_form,
-        'obj': obj
+        'obj': obj,
+        'role':role
     }
     return render(request,'users/profile.html',context)
 

@@ -44,6 +44,9 @@ urlpatterns = [
     path('index/', posts_views.index, name='index'),
     path('myOrders/', posts_views.myOrders, name='myOrders'),
     path('myPosts/', posts_views.myPosts, name='myPosts'),
+    path('myDeliveries/', posts_views.myDeliveries, name='myDeliveries'),
+    path('pendingDeliveries/', posts_views.pendingDeliveries, name='pendingDeliveries'),
+    path('verify_donations/<int:id>/', posts_views.verifyDonation, name='verify_donations'),
     path('',posts_views.index),
 
 ]

@@ -23,6 +23,9 @@ class Item(models.Model):
     image = models.ImageField(default='default.png',upload_to='profile_pics')
     freshTill = models.IntegerField(default=0)
     walletPublicAddress = models.CharField(max_length=50,null=True,default=0)
+    deliveredBy = models.OneToOneField(ProfileModel,on_delete=models.CASCADE,null=True,related_name = 'deliveredBy')
+    isChecked = models.BooleanField(default=False,null=True)
+
 
     def __str__(self):
         return f'{self.pk} {self.posting_organization}'

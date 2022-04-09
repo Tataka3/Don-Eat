@@ -33,15 +33,23 @@
 
 
             {% if user.is_authenticated %}
+
+            {% if role == 'DELIVERY' %}
+            <a href="{% url 'pendingDeliveries' %}" class="nav-item nav-link"> Pending Deliveries </a>
+
+            <a href="{% url 'myDeliveries' %}" class="nav-item nav-link"> My Deliveries </a>
+            <a href="{% url 'profile' %}" class="nav-item nav-link"> Profile </a>
+                <a href="{% url 'logout' %}"  class="nav-item nav-link"> Log out </a>
+            {% else %}
                 
-                <a href="{% url 'donate' %}" class="nav-item nav-link"> Donate </a>
+            <a href="{% url 'donate' %}" class="nav-item nav-link"> Donate </a>
 
             <a href="{% url 'index' %}" class="nav-item nav-link"> View Donations</a>
             <a href="{% url 'myOrders' %}" class="nav-item nav-link">My orders</a>
             <a href="{% url 'myPosts' %}" class="nav-item nav-link">My Posts</a>
             <a href="{% url 'profile' %}" class="nav-item nav-link"> Profile </a>
                 <a href="{% url 'logout' %}"  class="nav-item nav-link"> Log out </a>
-
+            {% endif %}
 
                 {% else  %}
                 <a href="{% url 'register' %}" class="nav-item nav-link"> Register </a>

@@ -19,7 +19,9 @@
             </form>
         </div>
     </div>
-    <br> <br>
+    <br>
+    <legend class="border-bottom mb-4" style="text-align: center;"> My Deliveries </legend>
+     <br>
     <div class="row">
         {%  for item in item_objects %}
 
@@ -28,7 +30,7 @@
                 <img height="200px" width="300px" src="{{ item.image.url }}" class="card-img-top">
                 <div class="card-body">
                     <div id="name{{ item.id }}" class="card-title">
-                        {{ item.organization }}
+                        {{ item.posting_organization }}
                     </div>
                     <div class="card-text">
 
@@ -37,11 +39,11 @@
                         <span id="price{{ item.id }}">  Description : {{ item.description }} </span> <br>
                         <span id="price{{ item.id }}">  Category : {{ item.category }} </span> <br>
                         <br>
-                                    <span class="badge badge-pill badge-success"> Location : {{ item.posting_organization.location }} </span>
+                                <span class="badge badge-pill badge-primary"> FROM : {{ item.posting_organization.location }} </span> <br> 
+                                <span class="badge badge-pill badge-primary"> TO : {{ item.ordering_organization.location }} </span>
 
                     </div>
 
-                    <a href="#" class="btn btn-outline-info"> Order </a>
                     <div style="font-size: 0.001px;" id="discprice{{ item.id }}">  Rs. {{ item.category }} </div>
 
 

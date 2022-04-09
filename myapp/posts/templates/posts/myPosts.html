@@ -35,9 +35,11 @@
                     <div class="card-text">
 
                         <span id="price{{ item.id }}">  Fresh Till : {{ item.freshTill }} (hours) </span> <br>
+                        <span id="price{{ item.id }}">  Quantity : {{ item.quantity }} (KG)</span> <br>
                         <span id="price{{ item.id }}">  Description : {{ item.description }} </span> <br>
                         <span id="price{{ item.id }}">  Category : {{ item.category }} </span> <br>
-                        
+                        <br>
+                                    <span class="badge badge-pill badge-success"> Location : {{ item.posting_organization.location }} </span>
 
                     </div>
 

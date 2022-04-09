@@ -19,7 +19,9 @@
             </form>
         </div>
     </div>
-    <br> <br>
+    <br>
+    <legend class="border-bottom mb-4" style="text-align: center;"> My Failed Orders </legend>
+     <br>
     <div class="row">
         {%  for item in item_objects %}
 
@@ -28,7 +30,7 @@
                 <img height="200px" width="300px" src="{{ item.image.url }}" class="card-img-top">
                 <div class="card-body">
                     <div id="name{{ item.id }}" class="card-title">
-                        {{ item.organization }}
+                        {{ item.posting_organization }}
                     </div>
                     <div class="card-text">
 
@@ -41,10 +43,13 @@
 
                     </div>
 
-                    <a href="#" class="btn btn-outline-info"> Order </a>
-                    <div style="font-size: 0.001px;" id="discprice{{ item.id }}">  Rs. {{ item.category }} </div>
-
-
+                    <span class="badge badge-pill badge-failure"> FAILED  </span> <br>
+                    {% if item.isQualityOK == False %}
+                    <span class="badge badge-pill badge-failure"> Quality not up to mark </span>
+                    {% endif %}
+                    {% if item.isQuantityOK == False %}
+                    <span class="badge badge-pill badge-failure"> Quantity not up to mark </span>
+                    {% endif %}
                 </div>
             </div>
         <br>
