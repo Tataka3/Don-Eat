@@ -25,7 +25,7 @@ def donate(request):
         if donate_form.is_valid():
             user = request.user
             org = ProfileModel.objects.get(user=user)
-            donate_form.instance.organization = org
+            donate_form.instance.posting_organization = org
             donate_form.instance.walletPublicAddress = wPublicAddress
             donate_form.save()
             messages.success(request, f'Post created successfully!')

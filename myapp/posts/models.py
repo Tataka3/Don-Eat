@@ -11,8 +11,8 @@ CATEGORY_CHOICES = (
 
 # Create your models here.
 class Item(models.Model):
-    posting_organization = models.OneToOneField(ProfileModel,on_delete=models.CASCADE,null=True,related_name = 'posting_organization')
-    ordering_organization = models.OneToOneField(ProfileModel,on_delete=models.CASCADE,null=True,related_name = 'ordering_organization')
+    posting_organization = models.ForeignKey(ProfileModel,on_delete=models.CASCADE,null=True,related_name = 'posting_organization')
+    ordering_organization = models.ForeignKey(ProfileModel,on_delete=models.CASCADE,null=True,related_name = 'ordering_organization')
     isOrdered = models.BooleanField(default=False,null=True)
     isDelivered = models.BooleanField(default=False,null=True)
     isQualityOK = models.BooleanField(default=False,null=True)
@@ -23,7 +23,7 @@ class Item(models.Model):
     image = models.ImageField(default='default.png',upload_to='profile_pics')
     freshTill = models.IntegerField(default=0)
     walletPublicAddress = models.CharField(max_length=50,null=True,default=0)
-    deliveredBy = models.OneToOneField(ProfileModel,on_delete=models.CASCADE,null=True,related_name = 'deliveredBy')
+    deliveredBy = models.ForeignKey(ProfileModel,on_delete=models.CASCADE,null=True,related_name = 'deliveredBy')
     isChecked = models.BooleanField(default=False,null=True)
 
 
