@@ -1,5 +1,6 @@
 from django.shortcuts import render , redirect
 from .models import Item 
+from algorithms.giveEther import give_ether
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -11,6 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin , UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from . forms import ItemForm
 from users.models import ProfileModel
+import smtplib, ssl
 
 # Create your views here.
 @login_required
@@ -161,6 +163,18 @@ def pendingDeliveries(request):
 
     return render(request, 'posts/pendingDeliveries.html', {'item_objects': item_objects,'role':role})
 
+def send_email(message, receiver_email):    
+    port = 465  # For SSL
+    password = 'tatakae123'
+
+    # Create a secure SSL context
+    context = ssl.create_default_context()
+    sender_email = "palnishant402@gmail.com"
+    with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+        server.login(sender_email, password)
+
+    server.sendmail(sender_email, receiver_email, message)
+
 @login_required
 def verifyDonation(request,id):
     ob = ProfileModel.objects.get(user=request.user)
@@ -168,6 +182,7 @@ def verifyDonation(request,id):
 
     inst = Item.objects.get(id=id)
     walletAddress = inst.ordering_organization.walletPublicAddress
+    email = inst.ordering_organization.user.email
 
     if request.method == 'POST':
         quality = request.POST.get("quality")
@@ -181,7 +196,8 @@ def verifyDonation(request,id):
             inst.isQuantityOK = True
             inst.isQualityOK = True
             inst.save()
-
+            message = give_ether(walletAddress)
+            send_email(message, email)
             messages.success(request, f'Order accepted successfully!')
             return redirect('index')
 
