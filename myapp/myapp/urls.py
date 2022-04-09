@@ -22,6 +22,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -39,8 +40,11 @@ urlpatterns = [
     path('profile/', users_views.profile, name='profile'),
     path('setProfile/', users_views.setProfileData, name='setProfile'),
     path('donate/', posts_views.donate, name='donate'),
-    path('view_donations/', posts_views.viewDonation, name='view_donations'),
+    path('view_donations/<int:id>/', posts_views.viewDonation, name='view_donations'),
     path('index/', posts_views.index, name='index'),
+    path('myOrders/', posts_views.myOrders, name='myOrders'),
+    path('myPosts/', posts_views.myPosts, name='myPosts'),
     path('',posts_views.index),
 
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

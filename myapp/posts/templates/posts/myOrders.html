@@ -19,7 +19,9 @@
             </form>
         </div>
     </div>
-    <br> <br>
+    <br>
+    <legend class="border-bottom mb-4" style="text-align: center;"> My Orders </legend>
+     <br>
     <div class="row">
         {%  for item in item_objects %}
 
@@ -39,7 +41,6 @@
 
                     </div>
 
-                    <a href="{% url 'view_donations' item.pk %}" class="btn btn-outline-info"> Order </a>
                     <div style="font-size: 0.001px;" id="discprice{{ item.id }}">  Rs. {{ item.category }} </div>
 
 
