@@ -1,0 +1,159 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/1580d3d6c7.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <base href="/">
+
+    <link rel="stylesheet" href="{% static 'shop/style.css' %}">
+    <title>Don'Eat</title>
+
+</head>
+<body>
+     <nav class="navbar nvb navbar-fixed-top">
+        <a href="#" class="navbar-brand"> Don'Eat </a>
+
+        <div class="navbar">
+
+            
+            <a href="{% url 'donate' %}" class="nav-item nav-link"> Donate </a>
+
+            <a href="{% url 'view_donations' %}" class="nav-item nav-link"> View Donations</a>
+
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}" class="nav-item nav-link"> Profile </a>
+                <a href="{% url 'logout' %}"  class="nav-item nav-link"> Log out </a>
+
+                {% else  %}
+                <a href="{% url 'register' %}" class="nav-item nav-link"> Register </a>
+                <a href="{% url 'login' %}"  class="nav-item nav-link"> Log In </a>
+            {% endif %}
+
+
+
+
+        </div>
+
+    </nav>
+
+    {% if messages %}
+        {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+    </div>
+        {% endfor %}
+    {% endif %}
+
+    {% block body %}
+    {% endblock %}
+
+
+</body>
+ <script>
+
+    if(localStorage.getItem('cart')==null){
+        var cart={};
+        var item_name={};
+        var item_price={};
+        var item_discounted_price={};
+        var total_price = 0;
+        var disc_applied = 0;
+        var final_amount = 0;
+        var dish_names = '';
+    }
+    else{
+        cart = JSON.parse(localStorage.getItem('cart'));
+        item_name =  JSON.parse(localStorage.getItem('item_name'));
+        item_price =  JSON.parse(localStorage.getItem('item_price'));
+        item_discounted_price = JSON.parse(localStorage.getItem('item_discounted_price'));
+    }
+    var len = Object.keys(cart).length;
+    document.getElementById("cart_items").innerHTML = "Cart("+(len)+")";
+
+    $(document).on('click','.atc',function(){
+        var item_id = this.id.toString();
+
+        if(cart[item_id]!=undefined){
+            cart[item_id] = cart[item_id] + 1;
+
+        }
+        else{
+            cart[item_id] = 1;
+        }
+        if(item_name[item_id]==undefined){
+            item_name[item_id] =document.getElementById("name"+item_id).innerHTML;
+
+        }
+        if(item_price[item_id]==undefined){
+            console.log(document.getElementById("price"+item_id).innerHTML);
+            item_price[item_id] =document.getElementById("price"+item_id).innerHTML;
+
+        }
+        if(item_discounted_price[item_id]==undefined){
+             console.log(document.getElementById("discprice"+item_id).innerHTML);
+            item_discounted_price[item_id] =document.getElementById("discprice"+item_id).innerHTML;
+
+        }
+        localStorage.setItem('item_name',JSON.stringify(item_name));
+        localStorage.setItem('item_price',JSON.stringify(item_price));
+        localStorage.setItem('item_discounted_price',JSON.stringify(item_discounted_price));
+        localStorage.setItem('cart',JSON.stringify(cart));
+        disp_cart(cart);
+        document.getElementById("cart_items").innerHTML = "Cart("+(Object.keys(cart).length)+")";
+    });
+
+ $(function () {
+  $('[data-toggle="popover"]').popover();
+})
+$('.popover-dismiss').popover({
+  trigger: 'focus'
+})
+
+
+        disp_cart(cart);
+
+        function disp_cart(cart) {
+            var cart_string = "";
+            var cart_index = 1;
+            for (var x in cart) {
+                cart_string += '<h6>' + cart_index + '. <span class="cart-heading">' + item_name[x] + '</span> <b> x ' + cart[x] + '</b></h6>';
+                cart_index += 1;
+            }
+
+            cart_string += "<a style='margin-left: 20%;' href='/checkout'> <button class='btn btn-warning' id='checkout'>Checkout</button></a>";
+            document.getElementById("cart_items").setAttribute('data-content', cart_string);
+
+        }
+    final_amount = JSON.parse(localStorage.getItem('final_amount'));
+    disc_applied = JSON.parse(localStorage.getItem('disc_applied'));
+    total_price = JSON.parse(localStorage.getItem('total_price'));
+    dish_names = JSON.parse(localStorage.getItem('dish_names'));
+
+
+    $('#total_price').val(JSON.stringify(total_price));
+    $('#final_amount').val(JSON.stringify(final_amount));
+    $('#disc_applied').val(JSON.stringify(disc_applied));
+    $('#dish_names').val(JSON.stringify(dish_names));
+    $('#item_quantity').val(JSON.stringify(cart));
+    $('#item_list_price').val(JSON.stringify(item_price));
+    $('#item_list_disc').val(JSON.stringify(item_discounted_price));
+
+</script>
+</html>

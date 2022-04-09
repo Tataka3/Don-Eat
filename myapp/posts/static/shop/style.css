@@ -1,0 +1,152 @@
+body{
+    font-family: Tahoma, monospace;
+
+}
+.navbar {
+    background-color: #f2f2f2;
+    padding: 12px;
+}
+ .nav-item{
+    color: red;
+    font-size: 16px;
+}
+.navbar-brand{
+    color: red;
+    font-size: 28px;
+    font-family: fantasy;
+    font-weight: bolder;
+}
+.nvb{
+    border: 1px solid white;
+    padding: 10px;
+    box-shadow: 2px 3px lightgray;
+}
+
+.container{
+    padding: 50px;
+}
+.card-text{
+    color: green;
+    font-weight: bolder;
+}
+.card-title{
+    font-weight: bolder;
+}
+
+@media only screen and (max-width: 600px) {
+    .card-img-top  {
+        margin: 0 auto;
+        height: 220px;
+        width: 100%;
+    }
+     .card-title , .card-text{
+         text-align: center;
+     }
+}
+.btn{
+    margin: 5px;
+}
+.pagination{
+    margin-left: 45%;
+}
+.card-img-top{
+    transition: transform .2s;
+}
+.card-img-top:hover{
+    transform: scale(1.2);
+}
+.detail-card{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin: 0 auto;
+    margin-top: 80px;
+    width: 70%;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+.index-card{
+     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+     background-color: #f2f2f2;
+}
+.index-card,.detail-card,.review:hover{
+     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card-body{
+    text-align: center;
+}
+
+.checkout-box{
+    margin: 0 auto;
+    height: 80%;
+    width: 80%;
+    text-align: left;
+}
+
+.content-section {
+  padding: 2%;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+    height: 40%;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.account-img {
+  height: 125px;
+  width: 150px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 30px;
+}
+
+.article-title {
+  color: steelblue;
+    font-size: 25px;
+}
+
+a.article-title:hover {
+  color: darkslategrey;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+    font-size: 15px;
+}
+
+.article-img {
+  height: 60px;
+  width: 65px;
+  margin-right: 10px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+.review{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+
+

@@ -1,0 +1,52 @@
+{% extends 'posts/base.html' %}
+{% block body %}
+
+<div class="container detail-card">
+    <div class="row">
+        <div class="row">
+        <div class="col-md-4">
+
+
+        </div>
+            </div>
+        <div class="col-md-6 offset-1">
+            <div class="row">
+                <div class="col-md-12 pb-2" style="font-size: 20px; font-family: Tahoma; font-weight: bold;">
+                    {{ item_obj }}
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="content-section">
+            <form method="POST">{% csrf_token %}
+                <input type="hidden" id="dish_names" name ="item_list">
+                <input type="hidden" id="item_quantity" name ="item_quantity">
+                <input type="hidden" id="item_list_disc" name ="item_list_disc">
+                <input type="hidden" id="item_list_price" name ="item_list_price">
+                <input type="hidden" id="total_price" name ="total_price">
+                <input type="hidden" id="disc_applied" name ="disc_applied">
+                <input type="hidden" id="final_amount" name ="final_amount">
+                     <fieldset class="form-group">
+                         <legend class="border-bottom mb-4"> Billing Information </legend>
+                     </fieldset>
+               <div class="form-group" style="text-align: center;">
+               <button onclick="clearcart()" type="submit" class="btn btn-info">Order</button>
+                   </div>
+                 </form>
+       
+                 <div class="border-top pt-3">
+                     <small class="text-muted">
+                         Want to add more dishes?
+                         <a class="ml-2" href="{% url 'index' %}"> Explore More </a>
+                     </small>
+                 </div>
+           </div>
+
+
+    </div>
+</div>
+
+{% endblock %}
+
