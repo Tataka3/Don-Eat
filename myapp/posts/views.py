@@ -173,6 +173,8 @@ def verifyDonation(request,id):
         quality = request.POST.get("quality")
         quantity = request.POST.get("quantity")
         inst.isChecked = True
+        print(quality)
+        print(quantity)
         if quality=='True' and quantity=='True':
 
             inst.isDelivered = True
@@ -205,24 +207,24 @@ def verifyDonation(request,id):
     
     return render(request,'posts/verify_donations.html',context)
 
-@login_required
-def myOrders(request):
+# @login_required
+# def myOrders(request):
 
-    ob = ProfileModel.objects.get(user=request.user)
-    role = ob.category
+#     ob = ProfileModel.objects.get(user=request.user)
+#     role = ob.category
 
-    item_objects = Item.objects.all()
-    org = ProfileModel.objects.get(user=request.user)
-    item_objects = item_objects.filter(ordering_organization=org)
-    item_objects = item_objects.filter(isChecked=True)
-    item_objects = item_objects.filter(isDelivered=False)
-    '''#adding search functionality
-    if item_name != '' and item_name is not None:
-        item_objects = item_objects.filter(title__icontains=item_name)
+#     item_objects = Item.objects.all()
+#     org = ProfileModel.objects.get(user=request.user)
+#     item_objects = item_objects.filter(ordering_organization=org)
+#     item_objects = item_objects.filter(isChecked=True)
+#     item_objects = item_objects.filter(isDelivered=False)
+#     '''#adding search functionality
+#     if item_name != '' and item_name is not None:
+#         item_objects = item_objects.filter(title__icontains=item_name)
 
-    #adding pagination
-    paginator = Paginator(item_objects,6)
-    page = request.GET.get('page')
-    item_objects = paginator.get_page(page)'''
+#     #adding pagination
+#     paginator = Paginator(item_objects,6)
+#     page = request.GET.get('page')
+#     item_objects = paginator.get_page(page)'''
 
-    return render(request, 'posts/myFailedOrders.html', {'item_objects': item_objects,'role':role})
+#     return render(request, 'posts/myFailedOrders.html', {'item_objects': item_objects,'role':role})
