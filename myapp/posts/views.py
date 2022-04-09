@@ -167,6 +167,7 @@ def verifyDonation(request,id):
     role = ob.category
 
     inst = Item.objects.get(id=id)
+    walletAddress = inst.ordering_organization.walletPublicAddress
 
     if request.method == 'POST':
         quality = request.POST.get("quality")
