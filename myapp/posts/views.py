@@ -1,11 +1,11 @@
 from django.shortcuts import render , redirect
 from .models import Item 
-from algorithms.giveEther import give_ether
+# from algorithms.giveEther import give_ether
+from algorithms.application import credit
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.template import loader
-import pdfkit
 from django.http import HttpResponse
 from django.views.generic import DetailView , CreateView , UpdateView , DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin , UserPassesTestMixin
@@ -196,7 +196,8 @@ def verifyDonation(request,id):
             inst.isQuantityOK = True
             inst.isQualityOK = True
             inst.save()
-            message = give_ether(walletAddress)
+            # message = give_ether(walletAddress)
+            message = credit(walletAddress,1)
             send_email(message, email)
             messages.success(request, f'Order accepted successfully!')
             return redirect('index')
