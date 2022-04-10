@@ -69,7 +69,8 @@
                      </div>
  
                      <div style="font-size: 0.001px;" id="discprice{{ item.id }}">  Rs. {{ item.category }} </div>
- 
+                     
+                     <a href="{% url 'view_donations' item.pk %}" class="btn btn-outline-info"> Order </a>
  
                  </div>
              </div>
