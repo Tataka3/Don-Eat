@@ -42,7 +42,8 @@ def credit(receiver,amount):
     unsigned_txn = contract_call.buildTransaction({'chainId': 3, 'nonce': nonce, 'gasPrice': w3.toWei(100, 'gwei')})
     signed_txn = w3.eth.account.sign_transaction(unsigned_txn, private_key=privKey)
     op=w3.eth.sendRawTransaction(signed_txn.rawTransaction)
-    print(op)
+    # print(op)
+    return f'{amount} MIKO has been credited to your wallet successfully'
 
 def checkBal(user):
     bal=miko.functions.balanceOf(receiver).call()
