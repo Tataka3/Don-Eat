@@ -12,7 +12,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin , UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from . forms import ItemForm
 from users.models import ProfileModel
-import smtplib, ssl
+from django.core.mail import send_mail
+
 
 # Create your views here.
 @login_required
@@ -163,17 +164,7 @@ def pendingDeliveries(request):
 
     return render(request, 'posts/pendingDeliveries.html', {'item_objects': item_objects,'role':role})
 
-def send_email(message, receiver_email):    
-    port = 465  # For SSL
-    password = 'tatakae123'
 
-    # Create a secure SSL context
-    context = ssl.create_default_context()
-    sender_email = "palnishant402@gmail.com"
-    with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-        server.login(sender_email, password)
-
-    server.sendmail(sender_email, receiver_email, message)
 
 @login_required
 def verifyDonation(request,id):
@@ -182,14 +173,12 @@ def verifyDonation(request,id):
 
     inst = Item.objects.get(id=id)
     walletAddress = inst.ordering_organization.walletPublicAddress
-    email = inst.ordering_organization.user.email
+    email = inst.posting_organization.user.email
 
     if request.method == 'POST':
         quality = request.POST.get("quality")
         quantity = request.POST.get("quantity")
         inst.isChecked = True
-        print(quality)
-        print(quantity)
         if quality=='True' and quantity=='True':
 
             inst.isDelivered = True
@@ -198,7 +187,11 @@ def verifyDonation(request,id):
             inst.save()
             # message = give_ether(walletAddress)
             message = credit(walletAddress,1)
-            send_email(message, email)
+            subject = f'Tokens from Don-Eat'
+            email_from = 'jainookun@gmail.com'
+            recipient_list = [email, ]
+            send_mail( subject, message, email_from, recipient_list )
+            print("Success mail sent")
             messages.success(request, f'Order accepted successfully!')
             return redirect('index')
 

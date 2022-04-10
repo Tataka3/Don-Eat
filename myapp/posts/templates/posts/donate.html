@@ -22,13 +22,7 @@
 
         <div class="content-section">
             <form method="POST">{% csrf_token %}
-                <input type="hidden" id="dish_names" name ="item_list">
-                <input type="hidden" id="item_quantity" name ="item_quantity">
-                <input type="hidden" id="item_list_disc" name ="item_list_disc">
-                <input type="hidden" id="item_list_price" name ="item_list_price">
-                <input type="hidden" id="total_price" name ="total_price">
-                <input type="hidden" id="disc_applied" name ="disc_applied">
-                <input type="hidden" id="final_amount" name ="final_amount">
+           
                      <fieldset class="form-group">
                          <legend class="border-bottom mb-4" style="text-align: center;"> Form for Food Donation </legend>
                          {{ d_form|crispy }}
