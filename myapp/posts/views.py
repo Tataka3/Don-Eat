@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect
 from .models import Item 
-# from algorithms.giveEther import give_ether
+#from algorithms.giveEther import give_ether
 from algorithms.application import credit
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
@@ -185,8 +185,8 @@ def verifyDonation(request,id):
             inst.isQuantityOK = True
             inst.isQualityOK = True
             inst.save()
-            # message = give_ether(walletAddress)
-            message = credit(walletAddress,1)
+            message = give_ether(walletAddress)
+            #message = credit(walletAddress,1)
             subject = f'Tokens from Don-Eat'
             email_from = 'jainookun@gmail.com'
             recipient_list = [email, ]
