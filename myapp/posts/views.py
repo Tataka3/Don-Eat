@@ -185,8 +185,8 @@ def verifyDonation(request,id):
             inst.isQuantityOK = True
             inst.isQualityOK = True
             inst.save()
-            message = give_ether(walletAddress)
-            #message = credit(walletAddress,1)
+            # message = give_ether(walletAddress)
+            message = credit(walletAddress,1)
             subject = f'Tokens from Don-Eat'
             email_from = 'jainookun@gmail.com'
             recipient_list = [email, ]
