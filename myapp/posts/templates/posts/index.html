@@ -45,6 +45,39 @@
         </a>
       </div>
 
+      <legend class="border-bottom mb-4" style="text-align: center;"> My Posts </legend>
+      <br>
+     <div class="row">
+         {%  for item in item_objects %}
+ 
+         <div class="col-md-6 col-sm-6 col-lg-4 col-xs-6">
+             <div class="card index-card">
+                 <img height="200px" width="300px" src="{{ item.image.url }}" class="card-img-top">
+                 <div class="card-body">
+                     <div id="name{{ item.id }}" class="card-title">
+                         {{ item.posting_organization }}
+                     </div>
+                     <div class="card-text">
+ 
+                         <span id="price{{ item.id }}">  Fresh Till : {{ item.freshTill }} (hours) </span> <br>
+                         <span id="price{{ item.id }}">  Quantity : {{ item.quantity }} (KG)</span> <br>
+                         <span id="price{{ item.id }}">  Description : {{ item.description }} </span> <br>
+                         <span id="price{{ item.id }}">  Category : {{ item.category }} </span> <br>
+                         <br>
+                                     <span class="badge badge-pill badge-success"> Location : {{ item.posting_organization.location }} </span>
+ 
+                     </div>
+ 
+                     <div style="font-size: 0.001px;" id="discprice{{ item.id }}">  Rs. {{ item.category }} </div>
+ 
+ 
+                 </div>
+             </div>
+         <br>
+         </div>
+ 
+         {% endfor %}
+     </div>
 
 
 
